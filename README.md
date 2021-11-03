@@ -8,13 +8,13 @@ I recommend [this](https://www.youtube.com/watch?v=TVq2ivVpZgQ) video from D!NG 
 ## How to use
 There are three python files in the main directory:
 
-.\GameShow!.py
+#### .\GameShow!.py
 This is the main script, it plays the game it has text responses and user input. Within the game you can also see statistics about previus games by entering S
 
-.\GameShowCallable.py
+#### .\GameShowCallable.py
 This is the same code without user input, intended to be called by the called
 
-.\caller.py
+#### .\caller.py
 This script is a fast method to generate games, you can verify the outcome using the statistics function in the main script  
 It calls the GameShowCallable script; it can accept 2 arguments
 
@@ -29,3 +29,16 @@ eg.
 "caller.py" 100 1  REM this calls the game 100 times and forces it to switch
 "caller.py" 100 0  REM this calls the game 100 times and forces it to not switch
 ```
+## Output
+Warning: there are already some placeholder game outputs made through testing that you can use to see statistics  
+The output.txt file contains outputs from each game you play in form of statistics, to remove the records simply remove the lines from the file  
+Each game is stored in this form (collpased in a line):
+```python
+{
+  0:[1,hasPrize, wasChosen], #door 1
+  1:[2,hasPrize, wasChosen], #door 2
+  2:[3,hasPrize, wasChosen], #door 3
+  3:[hasSwitched,didWin] #game summary
+}
+```
+`wasChosen can be in 3 states: 0->no; 1->yes; 2->revealed by game`
