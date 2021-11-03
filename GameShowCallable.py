@@ -56,6 +56,7 @@ def game(inp): #game start
     }
     dictOut[3][0] = changed
     dictOut[3][1] = won
+    
     with open(filename, "a") as f:
         dictStr = json.dumps(dictOut).replace('"', '')
         dictStr += '\n'
@@ -63,7 +64,6 @@ def game(inp): #game start
 
     return dictStr
     #end
-
 
 ### MAIN
 def main():

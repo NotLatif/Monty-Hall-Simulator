@@ -8,21 +8,23 @@ import os
 import sys
 init()
 
-class col:
+#global vars
+filename = "output.txt"
+
+doors = { #id:[doorNum, hasPrize, wasChosen] - #wasChosen states: 0->no; 1->yes; 2->revealed by game
+    0:[1,0,0],
+    1:[2,0,0], 
+    2:[3,0,0]
+}
+doors[randrange(3)][1] = 1 #choose random prize door
+
+#colors! 
+class col: 
     CYAN = '\033[96m'
     GREEN = '\033[92m'
     WARNING = '\033[93m'
     RED = '\033[91m'
     RES = '\033[0m'
-
-filename = "output.txt"
-
-doors = { #id:[doorNum, hasPrize, wasChosen] - #wasChosen states: 0->no; 1->yes; 2->revealed by game
-            0:[1,0,0],
-            1:[2,0,0], 
-            2:[3,0,0],
-        }
-doors[randrange(3)][1] = 1 #choose random prize door
 
 def div(n, d): #return 0 if division by 0
     return n / d if d else 0
@@ -42,7 +44,6 @@ def stats(): #statistics
     totalWins = 0
     totalLooses = 0
     totalGames = 0
-
 
     with open(filename) as f:
         for line in f:
@@ -73,9 +74,6 @@ def stats(): #statistics
             timesKept += 1
             totalLooses += 1
 
-
-    totalLooses = totalGames-totalWins
-
     print("Data:")
     print(f"The game was played {totalGames} times")#times/total
     print(f"The choice was changed {timesChanged} times ({(div(timesChanged, totalGames))*100}%), and kept {timesKept} times({(div(timesKept, totalGames))*100}%);")
@@ -88,10 +86,7 @@ def stats(): #statistics
     print(f"times kept: {timesKept} ({(div(timesKept, totalGames))*100}%)")
     print(f"kept and won: {winTimesKept} ({(div(winTimesKept, timesKept))*100}%)")
     print(f"kept and lost: {lostTimesKept} ({(div(lostTimesKept, timesKept))*100}%)")
-
     print(f"")
-
-
 
 def game(inp): #game start
 
@@ -103,7 +98,6 @@ def game(inp): #game start
                 print(f"{col.CYAN}The door {doors[x][0]} has a goat!")
                 doors[x][2] = 2
                 goat = x
-                
                 break
 
     for x in doors: #search for unknown door (not choosen, and not revealed by game)
@@ -149,8 +143,6 @@ def game(inp): #game start
         dictStr = json.dumps(dictOut).replace('"', '')
         dictStr += '\n'
         f.write(dictStr)
-
-
 
 ### MAIN
 def main():
