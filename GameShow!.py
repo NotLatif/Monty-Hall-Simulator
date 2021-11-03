@@ -134,6 +134,7 @@ def game(inp): #game start
                 won = 0
             break
 
+    #output to file adding id 3 for more data
     dictOut = {
         0:doors[0],
         1:doors[1],
@@ -142,6 +143,8 @@ def game(inp): #game start
     }
     dictOut[3][0] = changed
     dictOut[3][1] = won
+
+    #write to file
     with open(filename, "a") as f:
         dictStr = json.dumps(dictOut).replace('"', '')
         dictStr += '\n'
